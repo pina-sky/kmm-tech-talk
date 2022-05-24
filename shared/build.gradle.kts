@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
@@ -9,14 +7,7 @@ plugins {
 
 kotlin {
     android()
-
-    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
-        if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
-            ::iosArm64
-        else
-            ::iosX64
-
-    iosTarget("ios") {
+    ios {
         binaries {
             framework {
                 baseName = "shared"
@@ -24,20 +15,15 @@ kotlin {
         }
     }
 
-    val coroutinesVersion = "1.6.1"
-    val serializationVersion = "1.3.2"
-    val ktorVersion = "1.6.6"
-    val sqlDelightVersion = "1.4.2"
-
     sourceSets {
         // Common
         val commonMain by getting {
             dependencies {
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-core:$serializationVersion")
-                implementation("io.ktor:ktor-client-core:$ktorVersion")
-                implementation("io.ktor:ktor-client-serialization:$ktorVersion")
-                implementation("com.squareup.sqldelight:runtime:$sqlDelightVersion")
+                implementation(libs.coroutines)
+                implementation(libs.serialization)
+                implementation(libs.ktor)
+                implementation(libs.ktor.serialization)
+                implementation(libs.sqldelight.runtime)
             }
         }
         val commonTest by getting {
@@ -49,8 +35,8 @@ kotlin {
         // Android
         val androidMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-android:$ktorVersion")
-                implementation("com.squareup.sqldelight:android-driver:$sqlDelightVersion")
+                implementation(libs.ktor.client.android)
+                implementation(libs.sqldelight.driver.android)
             }
         }
         val androidTest by getting
@@ -58,8 +44,8 @@ kotlin {
         // iOS
         val iosMain by getting {
             dependencies {
-                implementation("io.ktor:ktor-client-ios:$ktorVersion")
-                implementation("com.squareup.sqldelight:native-driver:$sqlDelightVersion")
+                implementation(libs.ktor.client.ios)
+                implementation(libs.sqldelight.driver.ios)
             }
         }
         val iosTest by getting
