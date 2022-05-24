@@ -20,7 +20,7 @@ android {
 }
 
 dependencies {
-    implementation(projects.shared.shared)
+    implementation(projects.shared)
     implementation(libs.material)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
