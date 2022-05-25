@@ -1,32 +1,16 @@
 package com.kmmtechtalk.feature.spacex.api
 
-import com.kmmtechtalk.feature.spacex.model.Links
-import com.kmmtechtalk.feature.spacex.model.Rocket
+import com.kmmtechtalk.core.network.httpClient
 import com.kmmtechtalk.feature.spacex.model.RocketLaunch
+import io.ktor.client.call.*
+import io.ktor.client.request.*
 
 class SpaceXApiImpl : SpaceXApi {
     override suspend fun getAllLaunches(): List<RocketLaunch> {
-        return listOf(
-            RocketLaunch(
-                1,
-                "Mission 1",
-                2021,
-                "date",
-                Rocket("1", "Rocket 1","Type"),
-                null,
-                null,
-                Links(null, null)
-            ),
-            RocketLaunch(
-                2,
-                "Mission 2",
-                2022,
-                "date",
-                Rocket("2", "Rocket 2","Type"),
-                null,
-                null,
-                Links(null, null)
-            )
-        )
+        return httpClient.get(SPACEX_ENDPOINT).body()
+    }
+
+    companion object {
+        private const val SPACEX_ENDPOINT = "https://api.spacexdata.com/v3/launches"
     }
 }

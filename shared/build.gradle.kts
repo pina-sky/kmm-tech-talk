@@ -32,8 +32,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.coroutines)
-                implementation(libs.ktor)
-                implementation(libs.ktor.serialization)
                 implementation(libs.sqldelight.runtime)
                 api(projects.feature.spacex.api)
                 api(projects.feature.spacex.impl)
@@ -48,7 +46,6 @@ kotlin {
         // Android
         val androidMain by getting {
             dependencies {
-                implementation(libs.ktor.client.android)
                 implementation(libs.sqldelight.driver.android)
             }
         }
@@ -57,7 +54,6 @@ kotlin {
         // iOS
         val iosMain by getting {
             dependencies {
-                implementation(libs.ktor.client.ios)
                 implementation(libs.sqldelight.driver.ios)
             }
         }

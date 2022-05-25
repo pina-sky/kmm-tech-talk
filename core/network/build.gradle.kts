@@ -8,27 +8,34 @@ kotlin {
     ios()
 
     sourceSets {
+        // Common
         val commonMain by getting {
             dependencies {
-                api(projects.core.network)
-                api(projects.feature.spacex.api)
+                api(libs.ktor)
+                implementation(libs.ktor.serialization)
+                implementation(libs.ktor.contentnegotiation)
+            }
+        }
 
-                implementation(libs.coroutines)
-            }
-        }
-        val commonTest by getting {
+        // Android
+        val androidMain by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(libs.ktor.client.android)
             }
         }
-        val androidMain by getting
-        val iosMain by getting
+
+        // iOS
+        val iosMain by getting {
+            dependencies {
+                implementation(libs.ktor.client.ios)
+            }
+        }
     }
 }
 
 android {
     compileSdk = libs.versions.androidsdk.compile.get().toInt()
-    namespace = "com.kmmtechtalk.feature.spacex.impl"
+    namespace = "com.kmmtechtalk.core.network"
     defaultConfig {
         minSdk = libs.versions.androidsdk.min.get().toInt()
         targetSdk = libs.versions.androidsdk.target.get().toInt()
