@@ -2,19 +2,26 @@ package com.example.kmmtechtalk.android
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.kmmtechtalk.Greeting
 import android.widget.TextView
-
-fun greet(): String {
-    return Greeting().greeting()
-}
+import androidx.activity.viewModels
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel by viewModels<MainViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val tv: TextView = findViewById(R.id.text_view)
-        tv.text = greet()
+        viewModel.state.observe(this) {
+            val tv: TextView = findViewById(R.id.text_view)
+            tv.text = it.joinToString(", ")
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.fetchRocketLaunches()
     }
 }

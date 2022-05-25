@@ -1,6 +1,8 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.Framework
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
     kotlin("multiplatform")
-    kotlin("plugin.serialization")
     id("com.android.library")
     id("com.squareup.sqldelight")
 }
@@ -15,15 +17,26 @@ kotlin {
         }
     }
 
+    targets.withType<KotlinNativeTarget> {
+        binaries.withType<Framework> {
+            isStatic = false
+            export(projects.feature.spacex.api)
+            export(projects.feature.spacex.impl)
+
+            transitiveExport = true
+        }
+    }
+
     sourceSets {
         // Common
         val commonMain by getting {
             dependencies {
                 implementation(libs.coroutines)
-                implementation(libs.serialization)
                 implementation(libs.ktor)
                 implementation(libs.ktor.serialization)
                 implementation(libs.sqldelight.runtime)
+                api(projects.feature.spacex.api)
+                api(projects.feature.spacex.impl)
             }
         }
         val commonTest by getting {
@@ -54,7 +67,7 @@ kotlin {
 
 android {
     compileSdk = libs.versions.androidsdk.compile.get().toInt()
-    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    namespace = "com.example.kmmtechtalk"
     defaultConfig {
         minSdk = libs.versions.androidsdk.min.get().toInt()
         targetSdk = libs.versions.androidsdk.target.get().toInt()

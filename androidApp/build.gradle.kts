@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = libs.versions.androidsdk.compile.get().toInt()
     defaultConfig {
         applicationId = "com.example.kmmtechtalk.android"
-        minSdk = 23
-        targetSdk = 32
+        minSdk = libs.versions.androidsdk.min.get().toInt()
+        targetSdk = libs.versions.androidsdk.target.get().toInt()
         versionCode = 1
         versionName = "1.0"
     }
@@ -20,8 +20,15 @@ android {
 }
 
 dependencies {
-    implementation(projects.shared)
-    implementation(libs.material)
+    implementation(projects.feature.spacex.api)
+    implementation(projects.feature.spacex.impl)
+
+    implementation(libs.androidx.activity)
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.lifecycle.common)
+    implementation(libs.androidx.lifecycle.livedata)
+    implementation(libs.androidx.lifecycle.viewmodel)
+
+    implementation(libs.material)
 }
