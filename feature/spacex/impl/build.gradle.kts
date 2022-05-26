@@ -14,6 +14,7 @@ kotlin {
                 api(projects.feature.spacex.api)
 
                 implementation(libs.coroutines)
+                implementation(libs.koin)
             }
         }
         val commonTest by getting {

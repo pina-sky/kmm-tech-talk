@@ -20,6 +20,7 @@ android {
 }
 
 dependencies {
+    implementation(projects.shared)
     implementation(projects.feature.spacex.api)
     implementation(projects.feature.spacex.impl)
 
@@ -29,6 +30,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.common)
     implementation(libs.androidx.lifecycle.livedata)
     implementation(libs.androidx.lifecycle.viewmodel)
+
+    implementation(libs.koin)
+    implementation(libs.koin.android)
 
     implementation(libs.material)
 }

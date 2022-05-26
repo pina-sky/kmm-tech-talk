@@ -5,7 +5,7 @@ import com.kmmtechtalk.feature.spacex.model.RocketLaunch
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 
-class SpaceXApiImpl : SpaceXApi {
+internal class SpaceXApiImpl : SpaceXApi {
     override suspend fun getAllLaunches(): List<RocketLaunch> {
         return httpClient.get(SPACEX_ENDPOINT).body()
     }

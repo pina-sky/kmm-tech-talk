@@ -33,6 +33,7 @@ kotlin {
             dependencies {
                 implementation(libs.coroutines)
                 implementation(libs.sqldelight.runtime)
+                implementation(libs.koin)
                 api(projects.feature.spacex.api)
                 api(projects.feature.spacex.impl)
             }

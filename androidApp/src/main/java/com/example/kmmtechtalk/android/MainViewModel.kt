@@ -4,18 +4,16 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.kmmtechtalk.feature.spacex.api.SpaceXApiImpl
 import com.kmmtechtalk.feature.spacex.model.RocketLaunch
-import com.kmmtechtalk.feature.spacex.repository.SpaceXRepositoryImpl
-import com.kmmtechtalk.feature.spacex.usecase.GetRocketLaunchesUseCaseImpl
+import com.kmmtechtalk.feature.spacex.usecase.GetRocketLaunchesUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.dsl.viewModelOf
+import org.koin.dsl.module
 
-class MainViewModel : ViewModel() {
-
-    // TODO repository should be injected in constructor
-    private val spaceXApi = SpaceXApiImpl()
-    private val spaceXRepository = SpaceXRepositoryImpl(spaceXApi)
+class MainViewModel(
+    val getRocketLaunchesUseCase: GetRocketLaunchesUseCase
+) : ViewModel() {
 
     private var _state: MutableStateFlow<List<RocketLaunch>> = MutableStateFlow(emptyList())
     val state: LiveData<List<RocketLaunch>>
@@ -23,7 +21,11 @@ class MainViewModel : ViewModel() {
 
     fun fetchRocketLaunches() {
         viewModelScope.launch {
-            _state.value = GetRocketLaunchesUseCaseImpl(spaceXRepository).invoke()
+            _state.value = getRocketLaunchesUseCase()
         }
     }
+}
+
+val mainViewModelModule = module {
+    viewModelOf(::MainViewModel)
 }
