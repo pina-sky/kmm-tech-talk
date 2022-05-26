@@ -21,7 +21,6 @@ kotlin {
         binaries.withType<Framework> {
             isStatic = false
             export(projects.feature.spacex.api)
-            export(projects.feature.spacex.impl)
 
             transitiveExport = true
         }
@@ -35,7 +34,7 @@ kotlin {
                 implementation(libs.sqldelight.runtime)
                 implementation(libs.koin)
                 api(projects.feature.spacex.api)
-                api(projects.feature.spacex.impl)
+                implementation(projects.feature.spacex.impl)
             }
         }
         val commonTest by getting {
