@@ -15,6 +15,12 @@ kotlin {
                 implementation(libs.serialization)
             }
         }
+
+        val iosMain by getting {
+            dependencies {
+                implementation(libs.koin)
+            }
+        }
     }
 }
 

@@ -6,11 +6,15 @@ struct iOSApp: App {
 
     init() {
         KoinKt.doInitKoin()
+
+        print("test");
     }
 
 	var body: some Scene {
 		WindowGroup {
-			ContentView()
+            NavigationView {
+                HomeView()
+            }
 		}
 	}
 }
