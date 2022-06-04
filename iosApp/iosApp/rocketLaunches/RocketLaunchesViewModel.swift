@@ -14,12 +14,13 @@ extension RocketLaunchesView {
     @MainActor class ViewModel: ObservableObject {
         @Published var rocketLaunches: [RocketLaunch] = []
         
+        private let getRocketLaunchesUseCase = GetRocketLaunchesUseCaseFactory().buildGetRocketLaunchesUseCase()
+        
         init() {
             fetchRocketLaunches()
         }
         
         func fetchRocketLaunches() {
-            let getRocketLaunchesUseCase = GetRocketLaunchesUseCaseFactory().buildGetRocketLaunchesUseCase()
             getRocketLaunchesUseCase.invoke() { (result, error) in
                 if result != nil {
                     self.rocketLaunches = result!
