@@ -14,6 +14,7 @@ kotlin {
                 api(libs.ktor)
                 implementation(libs.ktor.serialization)
                 implementation(libs.ktor.contentnegotiation)
+                implementation(libs.koin)
             }
         }
 
