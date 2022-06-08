@@ -8,7 +8,7 @@
 
 import Foundation
 import shared
-
+import KMPNativeCoroutinesAsync
 
 extension RocketLaunchesView {
     @MainActor class ViewModel: ObservableObject {
@@ -16,16 +16,23 @@ extension RocketLaunchesView {
         
         private let getRocketLaunchesUseCase = GetRocketLaunchesUseCaseFactory().buildGetRocketLaunchesUseCase()
         
+        private var getRocketLaunchesHandle: Task<Void, Never>?
+        
         init() {
             fetchRocketLaunches()
         }
         
         func fetchRocketLaunches() {
-            getRocketLaunchesUseCase.invoke() { (result, error) in
-                if result != nil {
-                    self.rocketLaunches = result!
+            getRocketLaunchesHandle = Task {
+                let result = await asyncResult(for: getRocketLaunchesUseCase.invokeNative())
+                if case let .success(launches) = result {
+                    self.rocketLaunches = launches
                 }
             }
+        }
+        
+        func onViewDisappear() {
+            getRocketLaunchesHandle?.cancel()
         }
     }
 }

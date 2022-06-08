@@ -2,6 +2,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
     id("com.android.library")
+    id("com.rickclephas.kmp.nativecoroutines") version "0.12.2"
 }
 
 kotlin {

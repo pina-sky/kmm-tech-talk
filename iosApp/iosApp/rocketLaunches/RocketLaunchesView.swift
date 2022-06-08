@@ -18,6 +18,9 @@ struct RocketLaunchesView: View {
                 RocketLaunchView(rocketLaunch: launch)
             }
         }
+        .onDisappear {
+            viewModel.onViewDisappear()
+        }
         .navigationTitle("RocketLaunches")
     }
 }
