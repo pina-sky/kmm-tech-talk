@@ -62,6 +62,14 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		0B19873A2850977000EF3F75 /* platformVersion */ = {
+			isa = PBXGroup;
+			children = (
+				0B3E7AA3284A84EE00341FE5 /* PlatformVersionView.swift */,
+			);
+			path = platformVersion;
+			sourceTree = "<group>";
+		};
 		0B3E7A9E284A7C3100341FE5 /* rocketLaunches */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,7 +106,7 @@
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
 				0B3E7AA1284A7CBD00341FE5 /* HomeView.swift */,
-				0B3E7AA3284A84EE00341FE5 /* PlatformVersionView.swift */,
+				0B19873A2850977000EF3F75 /* platformVersion */,
 			);
 			path = iosApp;
 			sourceTree = "<group>";

@@ -29,11 +29,6 @@ kotlin-serialization = { module = "org.jetbrains.kotlin:kotlin-serialization", v
 
 coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 
-sqldelight = { module = "com.squareup.sqldelight:gradle-plugin", version.ref = "sqldelight" }
-sqldelight_runtime = { module = "com.squareup.sqldelight:runtime", version.ref = "sqldelight" }
-sqldelight_driver_android = { module = "com.squareup.sqldelight:android-driver", version.ref = "sqldelight" }
-sqldelight_driver_ios = { module = "com.squareup.sqldelight:native-driver", version.ref = "sqldelight" }
-
 serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlinxSerialization" }
 
 ktor = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }

@@ -16,7 +16,7 @@ struct HomeView: View {
     var body: some View {
         
         VStack {
-            NavigationLink(destination: RocketLaunchesView(), tag: "Rocket Lauches", selection: $selection) {
+            NavigationLink(destination: RocketLaunchesView(), tag: "Rocket Launches", selection: $selection) {
                 EmptyView()
             }
             
@@ -25,7 +25,7 @@ struct HomeView: View {
             }
             
             Button("Rocket Launches (Suspend Example)") {
-                self.selection = "Rocket Lauches"
+                self.selection = "Rocket Launches"
             }
             .padding()
             .frame(maxWidth: .infinity)

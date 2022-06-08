@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
-    id("com.squareup.sqldelight")
 }
 
 kotlin {
@@ -31,7 +30,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(libs.coroutines)
-                implementation(libs.sqldelight.runtime)
                 implementation(libs.koin)
                 api(projects.feature.spacex.api)
                 implementation(projects.feature.spacex.impl)
@@ -42,22 +40,6 @@ kotlin {
                 implementation(kotlin("test"))
             }
         }
-
-        // Android
-        val androidMain by getting {
-            dependencies {
-                implementation(libs.sqldelight.driver.android)
-            }
-        }
-        val androidTest by getting
-
-        // iOS
-        val iosMain by getting {
-            dependencies {
-                implementation(libs.sqldelight.driver.ios)
-            }
-        }
-        val iosTest by getting
     }
 }
 
